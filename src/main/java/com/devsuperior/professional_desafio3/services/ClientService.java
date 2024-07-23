@@ -25,7 +25,7 @@ public class ClientService {
 	@Transactional(readOnly = true)
 	public ClientDTO findById(Long id) {
 		Client client = repository.findById(id).orElseThrow(
-				() -> new com.devsuperior.professional_desafio3.services.exceptions.ResourceNotFoundException(
+				() -> new ResourceNotFoundException(
 						"Recurso não encontrado"));
 		return new ClientDTO(client);
 	}
@@ -36,6 +36,7 @@ public class ClientService {
 		return result.map(x -> new ClientDTO(x));
 	}
 
+	@Transactional
 	public ClientDTO update(Long id, ClientDTO dto) {
 
 		try {
